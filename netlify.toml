@@ -1,6 +1,7 @@
 [build]
-  command = "go build -o ./functions/chatgpt4 ./functions/main.go"
+  command = "./build.sh"
   functions = "functions"
+  publish = "static"
 
 [[redirects]]
   from = "/*"
