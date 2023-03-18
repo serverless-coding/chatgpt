@@ -22,7 +22,7 @@
                 length: parseInt(length)
             };
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "/.netlify/functions/chatgpt4");
+            xhr.open("POST", "/chatgpt4");
             xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             xhr.onload = function() {
                 var result = JSON.parse(this.responseText).completion;

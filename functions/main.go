@@ -2,9 +2,13 @@ package main
 
 import (
 	"encoding/json"
+	"flag"
+	"fmt"
+	"log"
 	"net/http"
 	"os"
 
+	"github.com/apex/gateway"
 	"github.com/go-resty/resty/v2"
 )
 
@@ -56,7 +60,28 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(respBody)
 }
 
+/*
 func main() {
 	http.HandleFunc("/chatgpt4", handler)
 	http.ListenAndServe(":8080", nil)
+}*/
+
+var (
+	port = flag.Int("port", -1, "specify a port")
+)
+
+func main() {
+	flag.Parse()
+
+	http.HandleFunc("/chatgpt4", handler)
+	listener := gateway.ListenAndServe
+	portStr := "n/a"
+
+	if *port != -1 {
+		portStr = fmt.Sprintf(":%d", *port)
+		listener = http.ListenAndServe
+		http.Handle("/", http.FileServer(http.Dir("./public")))
+	}
+
+	log.Fatal(listener(portStr, nil))
 }
