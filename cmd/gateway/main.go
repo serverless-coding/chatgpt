@@ -44,12 +44,12 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	apiKey := os.Getenv(_apiKey)
 
 	client := resty.New()
-	respBody := Response{}
-	_, err = client.R().
+	// respBody := Response{}
+	resp, err := client.R().
 		SetHeader("Content-Type", "application/json").
 		SetHeader("Authorization", "Bearer "+apiKey).
 		SetBody(reqBody).
-		SetResult(&respBody).
+		// SetResult(&respBody).
 		Post(url)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -57,7 +57,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(respBody)
+	json.NewEncoder(w).Encode(resp.Body()) //Encode(respBody)
 }
 
 var (
