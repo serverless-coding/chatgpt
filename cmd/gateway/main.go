@@ -13,7 +13,7 @@ import (
 )
 
 const (
-	_api    = "https://api.openai.com/v1/engines/chatgpt-4/completions"
+	_api    = "https://api.openai.com/v1/chat/completions"
 	_apiKey = "OPENAI_API_KEY"
 )
 
