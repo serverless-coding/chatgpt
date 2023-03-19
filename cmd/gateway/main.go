@@ -18,8 +18,9 @@ const (
 )
 
 type Request struct {
-	Prompt string `json:"prompt"`
-	Length int    `json:"length"`
+	Prompt string `json:"prompt" description:""`
+	Length int    `json:"length" description:""`
+	Model  string `json:"model" description:""`
 }
 
 type Response struct {
@@ -39,6 +40,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
+
+	reqBody.Model = "gpt-3.5-turbo"
 
 	url := _api
 	apiKey := os.Getenv(_apiKey)
