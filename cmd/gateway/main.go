@@ -57,7 +57,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(resp.Body()) //Encode(respBody)
+	json.NewEncoder(w).Encode(string(resp.Body())) //Encode(respBody)
 }
 
 var (
