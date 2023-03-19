@@ -60,20 +60,15 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(respBody)
 }
 
-/*
-func main() {
-	http.HandleFunc("/chatgpt4", handler)
-	http.ListenAndServe(":8080", nil)
-}*/
-
 var (
 	port = flag.Int("port", -1, "specify a port")
 )
 
 func main() {
+	fmt.Println("server start")
 	flag.Parse()
 
-	http.HandleFunc("/chatgpt4", handler)
+	http.HandleFunc("/api/chatgpt4", handler)
 	listener := gateway.ListenAndServe
 	portStr := "n/a"
 

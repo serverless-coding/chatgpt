@@ -1,12 +1,6 @@
-#!/bin/bash
 set -euxo pipefail
 
-go build -o ./functions/chatgpt4 ./functions/main.go
-ls -al
+mkdir -p "$(pwd)/functions"
 GOBIN=$(pwd)/functions go install ./...
-
-ls -al ./functions/
 chmod +x "$(pwd)"/functions/*
 go env
-
-ls -al ./dist

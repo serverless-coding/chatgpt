@@ -1,12 +1,13 @@
 [build]
   command = "./build.sh"
   functions = "functions"
+  publish = "static"
 
-# 构建环境变量
 [build.environment]
+  GO_IMPORT_PATH = "github.com/serverless-coding/chatgpt"
   GO111MODULE = "on"
 
 [[redirects]]
-  from = "/*"
+  from = "/api/*"
   to = "/.netlify/functions/gateway/:splat"
   status = 200
