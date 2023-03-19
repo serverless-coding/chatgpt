@@ -18,9 +18,13 @@ const (
 )
 
 type Request struct {
-	Prompt string `json:"prompt" description:""`
-	Length int    `json:"length" description:""`
-	Model  string `json:"model" description:""`
+	Prompt  string `json:"prompt" description:""`
+	Length  int    `json:"length" description:""`
+	Model   string `json:"model" description:""`
+	Message []struct {
+		Role    string
+		Content string
+	}
 }
 
 type Response struct {
@@ -42,7 +46,13 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	reqBody.Model = "gpt-3.5-turbo"
-
+	reqBody.Message = append(reqBody.Message, struct {
+		Role    string
+		Content string
+	}{
+		Role:    "你是一位资深的全栈工程师,精通go,java,js,css,vue",
+		Content: reqBody.Prompt,
+	})
 	url := _api
 	apiKey := os.Getenv(_apiKey)
 
